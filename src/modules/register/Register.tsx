@@ -35,34 +35,34 @@ const Register = () => {
     }
   };
 
-  const registerByGoogle = async () => {
-    try {
-      setGoogleAuthLoading(true);
-      const token = await AuthService.registerByGoogle();
-      setGoogleAuthLoading(false);
-      dispatch(loginUser(token));
-      toast.success('Authentication is succeed!');
-      navigate('/');
-    } catch (error: any) {
-      toast.error(error.message || 'Failed');
-      setGoogleAuthLoading(false);
-    }
-  };
+  // const registerByGoogle = async () => {
+  //   try {
+  //     setGoogleAuthLoading(true);
+  //     const token = await AuthService.registerByGoogle();
+  //     setGoogleAuthLoading(false);
+  //     dispatch(loginUser(token));
+  //     toast.success('Authentication is succeed!');
+  //     navigate('/');
+  //   } catch (error: any) {
+  //     toast.error(error.message || 'Failed');
+  //     setGoogleAuthLoading(false);
+  //   }
+  // };
 
-  const registerByFacebook = async () => {
-    try {
-      setFacebookAuthLoading(true);
+  // const registerByFacebook = async () => {
+  //   try {
+  //     setFacebookAuthLoading(true);
 
-      const token = await AuthService.registerByFacebook();
-      setFacebookAuthLoading(false);
-      dispatch(loginUser(token));
-      toast.success('Register is succeeded!');
-      navigate('/');
-    } catch (error: any) {
-      setFacebookAuthLoading(false);
-      toast.error(error.message || 'Failed');
-    }
-  };
+  //     const token = await AuthService.registerByFacebook();
+  //     setFacebookAuthLoading(false);
+  //     dispatch(loginUser(token));
+  //     toast.success('Register is succeeded!');
+  //     navigate('/');
+  //   } catch (error: any) {
+  //     setFacebookAuthLoading(false);
+  //     toast.error(error.message || 'Failed');
+  //   }
+  // };
 
   const {handleChange, values, handleSubmit, touched, errors} = useFormik({
     initialValues: {
@@ -204,7 +204,7 @@ const Register = () => {
               </div>
             </div>
           </form>
-          <div className="social-auth-links text-center">
+          {/* <div className="social-auth-links text-center">
             <PfButton
               className="mb-2"
               block
@@ -227,7 +227,7 @@ const Register = () => {
               <i className="fab fa-google mr-2" />
               {t<string>('login.button.signUp.social', {what: 'Google'})}
             </PfButton>
-          </div>
+          </div> */}
           <Link to="/login" className="text-center">
             {t<string>('register.alreadyHave')}
           </Link>

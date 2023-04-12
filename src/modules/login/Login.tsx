@@ -15,8 +15,8 @@ import * as AuthService from '../../services/auth';
 
 const Login = () => {
   const [isAuthLoading, setAuthLoading] = useState(false);
-  const [isGoogleAuthLoading, setGoogleAuthLoading] = useState(false);
-  const [isFacebookAuthLoading, setFacebookAuthLoading] = useState(false);
+  // const [isGoogleAuthLoading, setGoogleAuthLoading] = useState(false);
+  // const [isFacebookAuthLoading, setFacebookAuthLoading] = useState(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -25,44 +25,45 @@ const Login = () => {
   const login = async (email: string, password: string) => {
     try {
       setAuthLoading(true);
-      const token = await AuthService.loginByAuth(email, password);
+      const response = await AuthService.loginByAuth(email, password);
       toast.success('Login is succeed!');
       setAuthLoading(false);
-      dispatch(loginUser(token));
+      dispatch(loginUser(response));
       navigate('/');
     } catch (error: any) {
+      console.log(error);
       setAuthLoading(false);
-      toast.error(error.message || 'Failed');
+      toast.error('invalid user or password');
     }
   };
 
-  const loginByGoogle = async () => {
-    try {
-      setGoogleAuthLoading(true);
-      const token = await AuthService.loginByGoogle();
-      toast.success('Login is succeeded!');
-      setGoogleAuthLoading(false);
-      dispatch(loginUser(token));
-      navigate('/');
-    } catch (error: any) {
-      setGoogleAuthLoading(false);
-      toast.error(error.message || 'Failed');
-    }
-  };
+  // const loginByGoogle = async () => {
+  //   try {
+  //     setGoogleAuthLoading(true);
+  //     const token = await AuthService.loginByGoogle();
+  //     toast.success('Login is succeeded!');
+  //     setGoogleAuthLoading(false);
+  //     dispatch(loginUser(token));
+  //     navigate('/');
+  //   } catch (error: any) {
+  //     setGoogleAuthLoading(false);
+  //     toast.error(error.message || 'Failed');
+  //   }
+  // };
 
-  const loginByFacebook = async () => {
-    try {
-      setFacebookAuthLoading(true);
-      const token = await AuthService.loginByFacebook();
-      toast.success('Login is succeeded!');
-      setFacebookAuthLoading(false);
-      dispatch(loginUser(token));
-      navigate('/');
-    } catch (error: any) {
-      setFacebookAuthLoading(false);
-      toast.error(error.message || 'Failed');
-    }
-  };
+  // const loginByFacebook = async () => {
+  //   try {
+  //     setFacebookAuthLoading(true);
+  //     const token = await AuthService.loginByFacebook();
+  //     toast.success('Login is succeeded!');
+  //     setFacebookAuthLoading(false);
+  //     dispatch(loginUser(token));
+  //     navigate('/');
+  //   } catch (error: any) {
+  //     setFacebookAuthLoading(false);
+  //     toast.error(error.message || 'Failed');
+  //   }
+  // };
 
   const {handleChange, values, handleSubmit, touched, errors} = useFormik({
     initialValues: {
@@ -88,8 +89,8 @@ const Login = () => {
       <div className="card card-outline card-primary">
         <div className="card-header text-center">
           <Link to="/" className="h1">
-            <b>Admin</b>
-            <span>LTE</span>
+            <span>my</span>
+            <b>HRM</b>
           </Link>
         </div>
         <div className="card-body">
@@ -157,14 +158,14 @@ const Login = () => {
                   block
                   type="submit"
                   loading={isAuthLoading}
-                  disabled={isFacebookAuthLoading || isGoogleAuthLoading}
+                  // disabled={isFacebookAuthLoading || isGoogleAuthLoading}
                 >
                   {t<string>('login.button.signIn.label')}
                 </PfButton>
               </div>
             </div>
           </form>
-          <div className="social-auth-links text-center mt-2 mb-3">
+          {/* <div className="social-auth-links text-center mt-2 mb-3">
             <PfButton
               block
               className="mb-2"
@@ -187,17 +188,17 @@ const Login = () => {
               <i className="fab fa-google mr-2" />
               {t<string>('login.button.signIn.social', {what: 'Google'})}
             </PfButton>
-          </div>
+          </div> */}
           <p className="mb-1">
             <Link to="/forgot-password">
               {t<string>('login.label.forgotPass')}
             </Link>
           </p>
-          <p className="mb-0">
+          {/* <p className="mb-0">
             <Link to="/register" className="text-center">
               {t<string>('login.label.registerNew')}
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
