@@ -1,11 +1,12 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {MenuItem} from '@components';
 import {PfImage} from '@profabric/react-components';
 import styled from 'styled-components';
 import {SidebarSearch} from '@app/components/sidebar-search/SidebarSearch';
 import i18n from '@app/utils/i18n';
+import { toggleSidebarMenu } from '@app/store/reducers/ui';
 
 export interface IMenuItem {
   name: string;
@@ -16,32 +17,104 @@ export interface IMenuItem {
 
 export const MENU: IMenuItem[] = [
   {
-    name: i18n.t('menusidebar.label.dashboard'),
-    icon: 'fas fa-tachometer-alt nav-icon" />',
+    name: ('Dashboard'),
+    icon: 'fas fa-tachometer-alt nav-icon',
     path: '/'
   },
+  // {
+  //   name: i18n.t('menusidebar.label.blank'),
+  //   icon: 'fas fa-wrench nav-icon',
+  //   path: '/blank'
+  // },
+
+  // {
+  //   name: i18n.t('menusidebar.label.mainMenu'),
+  //   icon: 'far fa-caret-square-down nav-icon',
+  //   children: [
+  //     {
+  //       name: i18n.t('menusidebar.label.subMenu'),
+  //       icon: 'fas fa-hammer nav-icon',
+  //       path: '/sub-menu-1'
+  //     },
+  //     {
+  //       name: i18n.t('menusidebar.label.blank'),
+  //       icon: 'fas fa-cogs nav-icon',
+  //       path: '/sub-menu-2'
+  //     }
+  //   ]
+  // },
+
+  
   {
-    name: i18n.t('menusidebar.label.blank'),
-    icon: 'fas fa-wrench nav-icon',
-    path: '/blank'
+    name: ('Company Details'),
+    icon: 'fas fa-building-wheat nav-icon',
+    children:[{
+      name:'Company Structure',
+      icon: 'fas fa-solid fa-users nav-icon',
+      path:'/company'
+    },
+    {
+      name:'Masters',
+      icon: 'fas fa-solid fa-users nav-icon',
+      path:'/masters'
+    }
+      
+
+    ]
   },
   {
-    name: i18n.t('menusidebar.label.mainMenu'),
-    icon: 'far fa-caret-square-down nav-icon',
-    children: [
+    name: ('Employee'),
+    icon: 'fas fa-solid fa-users nav-icon',
+    children:[
       {
-        name: i18n.t('menusidebar.label.subMenu'),
-        icon: 'fas fa-hammer nav-icon',
-        path: '/sub-menu-1'
+        name: ('Employees'),
+        icon: 'fas fa-user-tie nav-icon',
+        path: '/employee'
       },
-
       {
-        name: i18n.t('menusidebar.label.blank'),
-        icon: 'fas fa-cogs nav-icon',
-        path: '/sub-menu-2'
+        name: ('Employee Report'),
+        icon: 'fas fa-solid fa-clipboard-check nav-icon',
+        path: '/blank'
       }
     ]
-  }
+  },
+  {
+    name: ('Expense Management'),
+    icon: 'fa-solid fa-calculator nav-icon',
+    children:[
+      {
+        name: ('Claim Expenses'),
+        icon: 'fa-solid fa-check-double nav-icon',
+        path: '/expenses'
+      },
+      {
+        name: ('Expense Report'),
+        icon: 'fas fa-solid fa-clipboard-check nav-icon',
+        path: '/avv'
+      },
+    ]
+  },
+  {
+    name: ('Time Management'),
+    icon: 'fa-solid fa-hourglass-half nav-icon',
+    children:[
+      {
+        name: ('Projects'),
+        icon: 'fa-solid fa-diagram-project nav-icon',
+        path: '/projects'
+      },
+      {
+        name: ('Own Timesheet'),
+        icon: 'fa-solid fa-pen-to-square nav-icon',
+        path: '/timesheet'
+      },
+      {
+        name: ('View Timesheet'),
+        icon: 'fa-solid fa-clock nav-icon',
+        path: '/ab'
+      }
+    ]
+  },
 ];
 
 const StyledBrandImage = styled(PfImage)`
@@ -56,6 +129,7 @@ const StyledBrandImage = styled(PfImage)`
 const StyledUserImage = styled(PfImage)`
   --pf-box-shadow: 0 3px 6px #00000029, 0 3px 6px #0000003b !important;
 `;
+  
 
 const MenuSidebar = () => {
   const user = useSelector((state: any) => state.auth.currentUser);
@@ -73,13 +147,14 @@ const MenuSidebar = () => {
           height={33}
           rounded
         />
-        <span className="brand-text font-weight-light">AdminLTE 3</span>
+        <span className="brand-text font-weight-light">myHRM</span>
       </Link>
+
       <div className="sidebar">
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
           <div className="image">
             <StyledUserImage
-              src={user.picture}
+              src=""
               fallbackSrc="/img/default-profile.png"
               alt="User"
               width={34}
@@ -98,7 +173,7 @@ const MenuSidebar = () => {
           <SidebarSearch />
         </div>
 
-        <nav className="mt-2" style={{overflowY: 'hidden'}}>
+        <nav className="mt-2">
           <ul
             className={`nav nav-pills nav-sidebar flex-column${
               menuItemFlat ? ' nav-flat' : ''

@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import Main from '@modules/main/Main';
 import Login from '@modules/login/Login';
+// import '../public/css/style.css'
 // import Register from '@modules/register/Register';
 import ForgetPassword from '@modules/forgot-password/ForgotPassword';
 import RecoverPassword from '@modules/recover-password/RecoverPassword';
@@ -13,11 +14,20 @@ import {setWindowSize} from '@app/store/reducers/ui';
 
 import Dashboard from '@pages/Dashboard';
 import Blank from '@pages/Blank';
-import SubMenu from '@pages/SubMenu';
 import Profile from '@pages/profile/Profile';
+import Employee from '@pages/Emplyee/Employee';
 
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import CompanyStructure from './pages/Company/CompanyStructure';
+import Skills from './pages/Company/Fields/Skills';
+import EmployeeList from './pages/Emplyee/EmployeeList';
+import Expenses from './pages/Expenses/Expenses';
+import Project from './pages/Time/Project';
+import TimeSheet from './pages/Time/TimeSheet';
+import Masters from './pages/Company/Masters';
+import EmpProfile from './pages/Emplyee/EmpProfile';
+import SubMenu from './pages/SubMenu';
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -48,11 +58,20 @@ const App = () => {
         </Route>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Main />}>
-            <Route path="/sub-menu-2" element={<Blank />} />
-            <Route path="/sub-menu-1" element={<SubMenu />} />
-            <Route path="/*" element={<Blank />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Dashboard />} />
+            <Route path="/sub" element={<SubMenu />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/employees" element={<EmployeeList />} />
+            <Route path='/company' element={<CompanyStructure/>}/>
+            <Route path='/expenses' element={<Expenses/>}/>
+            <Route path='/projects' element={<Project/>}/>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/timesheet" element={<TimeSheet />} />
+            <Route path="/masters" element={<Masters />} />
+            <Route path="/empprofile" element={<EmpProfile />} />
+            <Route path="/addleave" element={<EmpProfile />} />
+            <Route path="/manageleave" element={<EmpProfile />} />
+            <Route path="/*" element={<Blank />} />
           </Route>
         </Route>
       </Routes>

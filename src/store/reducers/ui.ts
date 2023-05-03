@@ -39,7 +39,7 @@ const initialState: UiState = {
   footerFixed: true,
   layoutBoxed: false,
   menuItemFlat: false,
-  menuChildIndent: false,
+  menuChildIndent: true,
   layoutFixed: false
 };
 

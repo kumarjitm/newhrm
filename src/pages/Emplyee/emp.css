@@ -1,0 +1,97 @@
+p{
+    margin: 0em !important;
+}
+
+@media only screen and (max-width:600px){
+    .employee_search{
+        display: flex;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+    .employee_search .input-group{
+        width: 100% !important;
+    }
+    .emp-list .card{
+        width: 90vw !important;
+    }
+    .print{
+        display: none;
+    }
+    .print-btn{
+        margin: 0 !important;
+    }
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.emp-Name p{
+    cursor: pointer !important;
+}
+
+.emp-details p:hover{
+    color: #8F43EE;
+    cursor: pointer;
+}
+
+input:active{
+    box-shadow: none !important;
+}
+
+input::selection{
+    box-shadow: none !important;
+}
+
+.addEmp-btn{
+    width: 5rem !important;
+    margin:20px 10px;
+    background-color: #0B2447 !important;
+    border: #0B2447 !important;
+}
+
+.btn_container{
+    position: absolute;
+    bottom: -18rem;
+    right: 0;
+}
+
+.profile-photo{
+    height: 140px;
+    width: 140px;
+    background-color: cyan;
+}
+
+.profile-basic{
+    padding: 1.2rem;
+}
+
+.emp-contact{
+    font-size: 15px;
+}
+
+@media only screen and (max-width:768px) {
+    .profile-photo{
+        height: 100px;
+        width: 100px;
+        background-color: cyan;
+        margin-bottom: 5px;
+    }
+    .profile-basic{
+        padding: 0.3rem;
+    }
+    .emp-contact{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width:1300px){
+    .emp-contact{
+        font-size: 15px;
+    }
+}
+.fa-copy:hover{
+    cursor: pointer;
+}
+.fa-copy:active{
+    font-size: larger;
+}

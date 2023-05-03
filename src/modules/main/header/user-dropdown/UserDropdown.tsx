@@ -126,7 +126,7 @@ const UserDropdown = () => {
     <StyledDropdown isOpen={dropdownOpen} hideArrow>
       <StyledSmallUserImage
         slot="button"
-        src={user.picture}
+        src=""
         fallbackSrc="/img/default-profile.png"
         alt="User"
         width={25}
@@ -136,7 +136,7 @@ const UserDropdown = () => {
       <div slot="menu">
         <UserHeader className=" bg-primary">
           <StyledBigUserImage
-            src={user.picture}
+            src=""
             fallbackSrc="/img/default-profile.png"
             alt="User"
             width={90}

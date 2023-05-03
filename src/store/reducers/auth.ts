@@ -2,13 +2,13 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export interface AuthState {
   isLoggedIn: boolean;
-  token: string | null;
+  userId: any | null;
   currentUser: any;
 }
 
 const initialState: AuthState = {
   isLoggedIn: !!localStorage.getItem('token'),
-  token: localStorage.getItem('token'),
+  userId:{},
   currentUser: {
     email: 'mail@example.com',
     picture: null
@@ -20,15 +20,15 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, {payload}) => {
-      localStorage.setItem('token', payload);
+      // localStorage.setItem('token', payload);
       state.isLoggedIn = true;
-      state.token = payload;
+      state.userId= payload;
     },
     logoutUser: (state) => {
-      localStorage.removeItem('token');
+      localStorage.clear();
       state.currentUser = {};
       state.isLoggedIn = false;
-      state.token = null;
+      state.userId = null;
     },
     loadUser: (state, {payload}) => {
       state.currentUser = payload;

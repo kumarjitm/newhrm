@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
@@ -7,6 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {loginUser} from '@store/reducers/auth';
 import {setWindowClass} from '@app/utils/helpers';
 import {PfButton, PfCheckbox} from '@profabric/react-components';
+import banner from './imgs/login_background1.jpg';
 
 import * as Yup from 'yup';
 
@@ -15,8 +16,6 @@ import * as AuthService from '../../services/auth';
 
 const Login = () => {
   const [isAuthLoading, setAuthLoading] = useState(false);
-  // const [isGoogleAuthLoading, setGoogleAuthLoading] = useState(false);
-  // const [isFacebookAuthLoading, setFacebookAuthLoading] = useState(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -26,44 +25,22 @@ const Login = () => {
     try {
       setAuthLoading(true);
       const response = await AuthService.loginByAuth(email, password);
-      toast.success('Login is succeed!');
-      setAuthLoading(false);
-      dispatch(loginUser(response));
-      navigate('/');
+      console.log(response);
+      if(response.statusCode==1){
+        toast.success('Login is succeed!');
+        setAuthLoading(false);
+        dispatch(loginUser(response.data.userId));
+        navigate('/');
+      }else{
+        toast.error(response.message);
+        setAuthLoading(false);
+      }
     } catch (error: any) {
-      console.log(error);
       setAuthLoading(false);
-      toast.error('invalid user or password');
+      toast.error(error.message);
     }
   };
 
-  // const loginByGoogle = async () => {
-  //   try {
-  //     setGoogleAuthLoading(true);
-  //     const token = await AuthService.loginByGoogle();
-  //     toast.success('Login is succeeded!');
-  //     setGoogleAuthLoading(false);
-  //     dispatch(loginUser(token));
-  //     navigate('/');
-  //   } catch (error: any) {
-  //     setGoogleAuthLoading(false);
-  //     toast.error(error.message || 'Failed');
-  //   }
-  // };
-
-  // const loginByFacebook = async () => {
-  //   try {
-  //     setFacebookAuthLoading(true);
-  //     const token = await AuthService.loginByFacebook();
-  //     toast.success('Login is succeeded!');
-  //     setFacebookAuthLoading(false);
-  //     dispatch(loginUser(token));
-  //     navigate('/');
-  //   } catch (error: any) {
-  //     setFacebookAuthLoading(false);
-  //     toast.error(error.message || 'Failed');
-  //   }
-  // };
 
   const {handleChange, values, handleSubmit, touched, errors} = useFormik({
     initialValues: {
@@ -75,6 +52,10 @@ const Login = () => {
       password: Yup.string()
         .min(5, 'Must be 5 characters or more')
         .max(30, 'Must be 30 characters or less')
+        // .matches(
+        //   /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]+$/,
+        //   'Password must contain atleast one lowercase letter,one uppercase letter,one number and a special character'
+        // )
         .required('Required')
     }),
     onSubmit: (values) => {
@@ -85,8 +66,8 @@ const Login = () => {
   setWindowClass('hold-transition login-page');
 
   return (
-    <div className="login-box">
-      <div className="card card-outline card-primary">
+    <div className="login-box" style={{backgroundImage:`url(${banner})`,backgroundRepeat:"no-repeat",backgroundSize:"cover",height:"100vh",width:"100vw"}}>
+      <div className="card shadow card-outline card-primary" style={{width:"22rem"}}>
         <div className="card-header text-center">
           <Link to="/" className="h1">
             <span>my</span>
@@ -155,50 +136,21 @@ const Login = () => {
               </div>
               <div className="col-4">
                 <PfButton
+                  className='btn-sm'
                   block
                   type="submit"
                   loading={isAuthLoading}
-                  // disabled={isFacebookAuthLoading || isGoogleAuthLoading}
                 >
                   {t<string>('login.button.signIn.label')}
                 </PfButton>
               </div>
             </div>
           </form>
-          {/* <div className="social-auth-links text-center mt-2 mb-3">
-            <PfButton
-              block
-              className="mb-2"
-              onClick={loginByFacebook}
-              loading={isFacebookAuthLoading}
-              disabled={isAuthLoading || isGoogleAuthLoading}
-            >
-              <i className="fab fa-facebook mr-2" />
-              {t<string>('login.button.signIn.social', {
-                what: 'Facebook'
-              })}
-            </PfButton>
-            <PfButton
-              block
-              theme="danger"
-              onClick={loginByGoogle}
-              loading={isGoogleAuthLoading}
-              disabled={isAuthLoading || isFacebookAuthLoading}
-            >
-              <i className="fab fa-google mr-2" />
-              {t<string>('login.button.signIn.social', {what: 'Google'})}
-            </PfButton>
-          </div> */}
           <p className="mb-1">
             <Link to="/forgot-password">
               {t<string>('login.label.forgotPass')}
             </Link>
           </p>
-          {/* <p className="mb-0">
-            <Link to="/register" className="text-center">
-              {t<string>('login.label.registerNew')}
-            </Link>
-          </p> */}
         </div>
       </div>
     </div>

@@ -54,6 +54,11 @@ const languages: Language[] = [
     key: 'es',
     icon: 'flag-icon-es',
     label: 'header.language.spanish'
+  },
+  {
+    key: 'in',
+    icon: 'flag-icon-in',
+    label: 'header.language.english'
   }
 ];
 

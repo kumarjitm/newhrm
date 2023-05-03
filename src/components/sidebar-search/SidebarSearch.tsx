@@ -78,7 +78,7 @@ export const SidebarSearch = () => {
   const findMenuItems = (menu: any, results: any = []): any[] => {
     // eslint-disable-next-line no-restricted-syntax
     for (const menuItem of menu) {
-      if (menuItem.name.includes(searchText) && menuItem.path) {
+      if (menuItem.name.includes(searchText.trim()) && menuItem.path) {
         results.push(menuItem);
       }
       if (menuItem.children) {

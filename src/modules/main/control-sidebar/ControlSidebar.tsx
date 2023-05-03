@@ -101,7 +101,7 @@ const ControlSidebar = () => {
         overflowY: 'scroll'
       }}
     >
-      <h5>Customize AdminLTE</h5>
+      <h5>Customize</h5>
       <hr className="mb-2" />
 
       <div style={{padding: '8px 0'}}>
@@ -109,12 +109,12 @@ const ControlSidebar = () => {
           <PfCheckbox checked={darkMode} onChange={handleDarkModeChange}>
             Dark mode
           </PfCheckbox>
-          <PfCheckbox checked={layoutBoxed} onChange={handleLayoutBoxedChange}>
+          {/* <PfCheckbox checked={layoutBoxed} onChange={handleLayoutBoxedChange}>
             Boxed (Broken when header or footer is fixed)
-          </PfCheckbox>
+          </PfCheckbox> */}
         </div>
 
-        <h6>Header Options</h6>
+        {/* <h6>Header Options</h6>
 
         <div className="mb-4">
           <PfCheckbox checked={headerFixed} onChange={handleHeaderFixedChange}>
@@ -126,10 +126,9 @@ const ControlSidebar = () => {
           >
             No Border
           </PfCheckbox>
-        </div>
+        </div> */}
 
-        <h6>Sidebar Options</h6>
-
+        {/* <h6>Sidebar Options</h6>
         <div className="mb-4">
           <PfCheckbox
             checked={menuSidebarCollapsed}
@@ -152,39 +151,39 @@ const ControlSidebar = () => {
           >
             Nav Child Indent
           </PfCheckbox>
-        </div>
+        </div> */}
 
-        <h6>Footer Options</h6>
+        {/* <h6>Footer Options</h6>
 
         <div className="mb-4">
           <PfCheckbox checked={footerFixed} onChange={handleFooterFixedChange}>
             Fixed
           </PfCheckbox>
-        </div>
+        </div> */}
 
         <PfSelect
           className="mt-3"
           value={navbarVariant}
-          label="Light Navbar Variants"
+          label="Light Header Variants"
           options={NAVBAR_LIGHT_VARIANTS}
           onChange={(e: any) => onNavbarVariantChange(e.target.value)}
           type="custom"
         />
         <PfSelect
           className="mt-3"
-          label="Dark Navbar Variants"
+          label="Dark Header Variants"
           value={navbarVariant}
           options={NAVBAR_DARK_VARIANTS}
           type="custom"
           onChange={(e: any) => onNavbarVariantChange(e.target.value)}
         />
-        <PfSelect
+        {/* <PfSelect
           className="mt-3"
           label="Accent Color Variants"
           options={[]}
           type="custom"
           disabled
-        />
+        /> */}
         <PfSelect
           className="mt-3"
           label="Light Sidebar Variants"
@@ -201,13 +200,13 @@ const ControlSidebar = () => {
           type="custom"
           onChange={(e: any) => onSidebarSkinChange(e.target.value)}
         />
-        <PfSelect
+        {/* <PfSelect
           className="mt-3"
           label="Brand Logo Variants"
           options={[]}
           type="custom"
           disabled
-        />
+        /> */}
       </div>
     </aside>
   );

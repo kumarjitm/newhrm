@@ -1,15 +1,24 @@
 import {removeWindowClass} from '@app/utils/helpers';
 import axios from 'axios';
-import {Gatekeeper} from 'gatekeeper-client-sdk';
+import { Gatekeeper } from 'gatekeeper-client-sdk';
+import { loginUrl } from './urls';
+
 
 export const loginByAuth = async (email: string, password: string) => {
   const obj ={email,password};
-  const response = await axios.post("http://localhost:3380/api/auth/login",obj);
-  const token=response.data.data.access_token;
-  localStorage.setItem('token', token);
-  removeWindowClass('login-page');
-  removeWindowClass('hold-transition');
-  return response.data;
+  const response = await axios.post(loginUrl,obj);
+    if(response.data.statusCode==1){
+      const token=(response.data.data.access_token);
+      const now=new Date().getTime();
+      localStorage.setItem('token',token);
+      localStorage.setItem("userId",response.data.data.userId);
+      localStorage.setItem("expiresIn",response.data.data.expiresIn);
+      localStorage.setItem("setTime",`${now}`);
+      removeWindowClass('login-page');
+      removeWindowClass('hold-transition');
+      return (response.data)
+    }
+  return (response.data);
 };
 
 export const registerByAuth = async (email: string, password: string) => {
